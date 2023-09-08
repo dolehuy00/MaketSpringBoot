@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+    <title>Login</title>
+    <script src="js/js.js" type="module"></script>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<!--<body>
+    <h1>Login Page</h1>
+    <form action="/login" method="post">
+        <label for="fullname">Full Name:</label>
+        <input type="text" id="fullname" name="fullname"><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"><br><br>
+        <input type="submit" value="Login">
+    </form>
+    
+    <div th:if="${message != null}">
+    <span th:text="${message}"></span>
+    </div>
+    
+</div>
+</body>-->
+
+<body class="">
+    <div class="container">
+        <div class="primary-bg">
+            <div class="box signin">
+                <h2>Already Have an Account?</h2>
+                <button class="signinBtn">Sign in</button>
+            </div>
+
+            <div class="box signup">
+                <h2>Don't Have an Account?</h2>
+                <button class="signupBtn">Sign up</button>
+            </div>
+        </div>
+        
+        <div class="formBx">
+            <div class="form signinForm">
+                <form id="login-form" action="/login" method="post">
+                    <h3>Sign In</h3>
+                    <div class="form-group">
+                        <input name="fullname" id="fullname" type="text"  placeholder="Username">
+                        <span class="form-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <input name="password" id="password" type="password"  placeholder="Password">
+                        <span class="form-message"></span>
+                    </div>
+                    <div class="message-div" th:if="${message != null}">
+                        <span th:text="${message}"></span>
+                    </div>
+                    <div class="form-group">
+                        <button  type="submit" class="form-submit login-btn"  onclick="onlogin()" >Submit</button>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="form signupForm">
+                <form id='formRegister'action="/register" method="POST" >
+                    <h3>Sign Up</h3>
+                    <div class="form-group invalid">
+                        <input name="nfullname" id="nfullname" type="text" placeholder="Username">
+                        <span id="errolUserName" class="form-message"></span>
+                    </div>
+                    
+
+                    <div class="form-group invalid">
+                        <input name="npassword" id="npassword" type="password" placeholder="Password">
+                        <span id="errolEmail" class="form-message"></span>
+                    </div>
+                    <div class="form-group invalid">
+                        <input name="naddress" id="naddress" type="text" placeholder="Address" aria-autocomplete="list">
+                        <span id="errolPassword" class="form-message"></span>
+                    </div>
+                    <div class="form-group invalid">
+                        <input name="ncity" id="ncity" type="text" placeholder="City">
+                        <span id="errolConfirmPassword" class="form-message"></span>
+                    </div>
+                    <div class="form-group invalid">
+                        <input name="cfpassword" id="cfpassword" type="password" placeholder="Confirm Password">
+                        <span id="errolEmail" class="form-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" name="signup" class="form-submit" onclick="onRegister()">Register</button>
+                    </div>
+                    <div class="message-div" th:if="${errormess}">
+                        <script th:inline="javascript">
+                            alert([[${errormess}]]);
+                        </script>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+    const signinBtn = document.querySelector('.signinBtn')
+    const signupBtn = document.querySelector('.signupBtn')
+    const formBx = document.querySelector('.formBx')
+    const body = document.querySelector('body')
+
+    signupBtn.onclick = function() {
+        formBx.classList.add('active')
+        body.classList.add('active')
+    }
+    signinBtn.onclick = function() {
+        formBx.classList.remove('active')
+        body.classList.remove('active')
+    }
+// Lấy tham chiếu đến phần tử <div> bằng JavaScript
+const messageDiv = document.querySelector('.message-div');
+
+// Kiểm tra xem phần tử <div> có tồn tại không
+if (messageDiv) {
+  // Đặt một timeout để thêm lớp CSS "hidden" sau 5 giây
+  setTimeout(() => {
+    messageDiv.classList.add('hidden');
+  }, 5000);
+}
+
+ function validateForm() {
+    var fullname = document.getElementById("nfullname").value;
+    var password = document.getElementById("npassword").value;
+    var address = document.getElementById("naddress").value;
+    var city = document.getElementById("ncity").value;
+    var cfpassword = document.getElementById("cfpassword").value;
+
+    if (fullname === "" || password === ""|| address === ""|| city === ""|| cfpassword === "") {
+        alert("Vui lòng điền đầy đủ thông tin.");
+        return false;
+    }
+
+    if (fullname.length < 5 || password.length < 5) {
+        alert("Username và password phải có ít nhất 5 ký tự.");
+        return false;
+    }
+    
+     if (password != cfpassword) {
+        alert("Xác nhận mật khẩu không trùng khớp");
+        return false;
+    }
+    
+    else{
+        alert("Đăng kí thành công");
+    return true;
+    
+    }
+
+}
+
+function onRegister() {
+    if (!validateForm()) {
+        event.preventDefault(); // Ngăn chặn việc submit form nếu dữ liệu không hợp lệ
+    }
+}
+function validateFormlogin() {
+    var fullname = document.getElementById("fullname").value;
+    var password = document.getElementById("password").value;
+   
+
+    if (fullname === "" || password === "") {
+        alert("Vui lòng điền đầy đủ thông tin.");
+        return false;
+    }
+ 
+    else{
+     
+    return true;
+    
+    }
+
+}
+
+function onlogin() {
+      if (!validateFormlogin()) {
+        event.preventDefault(); 
+    }
+
+}
+
+
+
+ 
+        
+    </script>
+    
+
+</body>
+</html>

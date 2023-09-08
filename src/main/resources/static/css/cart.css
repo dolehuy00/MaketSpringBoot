@@ -1,0 +1,62 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.cart {
+    border: 1px solid #ccc;
+    padding: 20px;
+    background-color: #f8f8f8;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Thêm justify-content */
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.cart-item img {
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+}
+
+.cart-item-info {
+    flex-grow: 1;
+}
+
+.cart-item-title {
+    font-weight: bold;
+}
+
+.cart-item-price {
+    margin-top: 5px;
+}
+
+.cart-item-actions {
+    display: flex; /* Hiển thị các nút theo hàng ngang */
+    align-items: center;
+}
+
+.cart-item-actions button {
+    margin-left: 10px;
+}
+
+.cart-total {
+    text-align: right;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.message-box {
+    margin-top: 20px;
+}
+.checkout-button{
+    margin-top: 10px;
+}
+.message-quantity{
+    display: none;
+}

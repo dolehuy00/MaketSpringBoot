@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="js/javaScript.js"></script>
+        <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        
+    </head>
+    <body>
+        <form action="/process-form" method="POST">
+            <select class="select" name="selectOptionName">
+
+                <option th:each="c, state : ${category}"
+                        th:text="${c.Name}" th:selected="${selectedOption == c.Name}">Tùy chọn</option>
+
+                <option th:selected="${selectedOption == 'Bán chạy'}">Bán chạy</option>
+            </select>
+            <input type="text" name="input-field">
+            <button type="submit">Tìm kiếm</button>
+        </form>
+        <div class="cart-link"><a href="/cart">Giỏ hàng</a></div>
+        <div class="parentTable">
+            <table id="myTable">
+                <thead>
+                    <tr>
+                        <th>Ảnh</th>
+                        <th>Tên loại sản phẩm</th>
+                        <th>Mã sản phẩm</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Giá</th>
+                        <th>Đơn vị tính</th>
+                        <th>Số lượng</th>
+                        <th>Tổng số lượng bán được</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each ="row, state : ${vegetableKey}">
+                        <td align="center" width="120"><img th:src="${row[0]}" width="100" height="100"/></td>
+                        <td th:text="${row[1]}"></td>
+                        <td th:text="${row[2]}"></td>
+                        <td th:text="${row[3]}"></td>
+                        <td th:text="${row[4]}"></td>
+                        <td th:text="${row[5]}"></td>
+                        <td th:text="${row[6]}"></td>
+                        <td th:text="${row[7]}"></td>
+                        <td><form class="btn btn-primary btn-sm" 
+                                  action="/"
+                                  method="post">
+                                <button class="btn add-cart" th:value="${row[2]}" name="add" type="submit">ADD CART</button>
+                            </form>
+                        </td>
+                    </tr>
+                  
+                </tbody>     
+            </table>
+        </div>
+        <p id="message-quantity" class="message-quantity" onpageshow="" th:utext="${MESSAGE_QUANTITY}"></p>
+        <script>
+            checkQuantity();
+        </script>
+    </body>
+</html>
