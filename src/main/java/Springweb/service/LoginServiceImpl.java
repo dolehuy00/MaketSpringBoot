@@ -23,11 +23,11 @@ import javax.persistence.Query;
  */
 @Service
 public class LoginServiceImpl implements LoginService {
- @PersistenceContext
+    @PersistenceContext
     private EntityManager entityManager;
-
+    
     @Override
-public Customers findCustomerByFullnameAndPassword(String fullname) {
+    public Customers findCustomerByFullnameAndPassword(String fullname) {
     Query query = entityManager.createNativeQuery(
         "SELECT * FROM Customers WHERE BINARY Fullname = ? ", Customers.class);
     query.setParameter(1, fullname);
